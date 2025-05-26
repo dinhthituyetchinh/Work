@@ -18,7 +18,7 @@ public class FirebaseHelper {
     }
 
     // Hàm chính để lấy dữ liệu từ Firestore
-    
+
     //Khong sap xep theo index
 //    public static void fetchAllParents(OnDataFetchedListener listener) {
 //        FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -149,4 +149,6 @@ public class FirebaseHelper {
 
         return result;
     }
+
+
 }

@@ -1,5 +1,7 @@
 package Adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.ThirdActivity;
 
 import java.util.List;
 
@@ -48,11 +51,20 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ParentView
     public static class ParentViewHolder extends RecyclerView.ViewHolder {
         TextView titleParent;
         RecyclerView rcChild;
+        TextView seeAllTextView;
+
 
         public ParentViewHolder(@NonNull View itemView) {
             super(itemView);
             titleParent = itemView.findViewById(R.id.titleParent);
             rcChild = itemView.findViewById(R.id.rcChild);
+            seeAllTextView = itemView.findViewById(R.id.seeAll);
+
+            seeAllTextView.setOnClickListener(v -> {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, ThirdActivity.class);
+                context.startActivity(intent);
+            });
         }
     }
 }
