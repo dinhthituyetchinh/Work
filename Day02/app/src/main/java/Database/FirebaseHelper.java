@@ -40,31 +40,38 @@ public class FirebaseHelper {
                             String title = entry.getKey();
                             Map<String, Object> value = (Map<String, Object>) entry.getValue();
 
+                            // Get the JSON string from "List" field
                             String jsonList = (String) value.get("List");
-                            int index = ((Long) value.get("Index")).intValue();
 
-                            // Parse list of children
+                            // Convert to List<Child>
                             List<Child> children = gson.fromJson(jsonList, listType);
 
-                            // ✅ Log dữ liệu
+                            // Get index safely
+                            int index = ((Long) value.get("Index")).intValue();
+
+                            // ✅ Log for debugging
                             Log.d("FirebaseHelper", "Title: " + title);
                             Log.d("FirebaseHelper", "Index: " + index);
                             Log.d("FirebaseHelper", "Children size: " + (children != null ? children.size() : 0));
 
                             if (children != null) {
                                 for (Child child : children) {
-                                    Log.d("FirebaseHelper", "  Static: " + child.getStaticImages() + ", Gif: " + child.getGifImages());
+                                    Log.d("FirebaseHelper", "  Static: " + child.getStaticImages());
+                                    Log.d("FirebaseHelper", "  Gif: " + child.getGifImages());
                                 }
                             }
 
-                            // Add to parent list
+                            // Add Parent object
                             parents.add(new Parent(title, index, children));
                         }
-                    }
 
-                    // Sort by index
-                    Collections.sort(parents, Comparator.comparingInt(Parent::getIndex));
-                    listener.onDataFetched(parents);
+                        // Sort by index
+                        Collections.sort(parents, Comparator.comparingInt(Parent::getIndex));
+                        listener.onDataFetched(parents);
+
+                    } else {
+                        listener.onDataFetched(parents); // Return empty list
+                    }
                 })
                 .addOnFailureListener(listener::onError);
     }
