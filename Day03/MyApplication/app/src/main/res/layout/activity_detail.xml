@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvBackDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_margin="16dp" />
+
+    <RelativeLayout
+        android:id="@+id/rlImageContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tvBackDetail"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/imgGifDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:layout_centerInParent="true" />
+
+        <!-- Button tải xuống bên dưới ImageView -->
+        <Button
+            android:id="@+id/btnDownloadGif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tải xuống"
+            android:layout_below="@id/imgGifDetail"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp" />
+    </RelativeLayout>
+
+    <!-- Gắn layout phụ vào đây -->
+    <include layout="@layout/loading_layout" />
+</RelativeLayout>
