@@ -1,0 +1,36 @@
+{
+  "Category": [
+    {
+      "CategoryName": "Animal",
+      "List": [
+        {
+          "name": "a1",
+          "static": "https://linkstatic&quot;,
+          "gif": "https://linkstatic&quot;
+        },
+        {
+          "name": "a2",
+          "static": "https://linkstatic&quot;,
+          "gif": "https://linkstatic&quot;
+        }
+      ],
+      "Index": 0
+    },
+    {
+      "CategoryName": "Battery",
+      "List": [
+        {
+          "name": "b1",
+          "static": "https://linkstatic&quot;,
+          "gif": "https://linkstatic&quot;
+        },
+        {
+          "name": "b2",
+          "static": "https://linkstatic&quot;,
+          "gif": "https://linkstatic&quot;
+        }
+      ],
+      "Index": 0
+    }
+  ]
+}
