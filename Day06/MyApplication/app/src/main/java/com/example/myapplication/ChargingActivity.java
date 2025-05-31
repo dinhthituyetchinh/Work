@@ -1,10 +1,14 @@
 package com.example.myapplication;
 
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +21,7 @@ public class ChargingActivity extends AppCompatActivity {
 
 
     ImageView imgFullScreen;
+    private TextView textBelowImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,5 +63,33 @@ public class ChargingActivity extends AppCompatActivity {
             Toast.makeText(this, "Chưa có ảnh nào được áp dụng!", Toast.LENGTH_SHORT).show();
             Log.e("ChargingActivity", "applied_path rỗng hoặc null trong SharedPreferences");
         }
+
+        textBelowImage = findViewById(R.id.textBelowImage);
+
+        updateChargingType();
+    }
+
+    private void updateChargingType() {
+        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        Intent batteryStatus = registerReceiver(null, ifilter);
+
+        int chargePlug = batteryStatus.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+
+        boolean usbCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
+        boolean acCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_AC;
+        boolean wirelessCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_WIRELESS;
+
+        String chargingType;
+        if (usbCharge) {
+            chargingType = "Đang sạc qua USB";
+        } else if (acCharge) {
+            chargingType = "Đang sạc nhanh (ổ cắm AC)";
+        } else if (wirelessCharge) {
+            chargingType = "Đang sạc không dây";
+        } else {
+            chargingType = "Không sạc";
+        }
+
+        textBelowImage.setText(chargingType);
     }
 }
